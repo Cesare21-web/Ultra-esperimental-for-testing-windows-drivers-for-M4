@@ -1,0 +1,41 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System
+ClassGuid   = {4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider    = %ManufacturerName%
+DriverVer   = 10/22/2025,1.0.0.0
+CatalogFile = AGXStub.cat
+
+[Manufacturer]
+%ManufacturerName% = AGXStub_Manufacturer,NTARM64
+
+[AGXStub_Manufacturer.NTARM64]
+%AGXStub.DeviceDesc% = AGXStub_Install, PCI\VEN_APPLE&DEV_AGXM4
+
+[AGXStub_Install]
+CopyFiles = @AGXStub.sys
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskName%,,,.
+
+[SourceDisksFiles]
+AGXStub.sys = 1
+
+[AGXStub_Install.Services]
+AddService = AGXStub,0x00000002,AGXStub_Service_Inst
+
+[AGXStub_Service_Inst]
+DisplayName = %AGXStub.SvcDesc%
+ServiceType = 1
+StartType   = 3
+ErrorControl= 1
+ServiceBinary = %12%\AGXStub.sys
+
+[Strings]
+ManufacturerName = "MZ Learning / Experimental"
+AGXStub.DeviceDesc = "Apple AGX M4 Stub Driver (KMDF)"
+AGXStub.SvcDesc = "Stub driver for experimental Apple Silicon GPU"
+DiskName = "AGXStub Installation Disk"
